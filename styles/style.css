@@ -1,0 +1,62 @@
+
+body {
+    background-color: #F4F4F4;
+    /* deixa os elementos flexíveis, permitindo que nós possamos usar alguns comandos de posicionamento dos elementos filhos */
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center; /* alinha os elementos na direção do flex */
+    align-items: center; /* alinha os elementos na direção contrária do flex*/
+
+    height: 100vh; /* height é a altura do elemento, quando temos vh significa que estamos dando um tamanho pro elemento que corresponde a uma "porcentagem" da tela -> viewport height*/
+
+}
+
+#caixa {
+    background-color: #FFFFFF; /* cor de fundo da caixinha */
+    width: 350px; /* largura da caixinha */
+    padding: 20px; /* espaços internos */
+    border: 1px solid #CCCCCC; /* coloca borda, espessura e cor */
+    border-radius: 10px; /* arredondamento dos cantos da caixinha */
+}
+
+#input-tarefa {
+    width: 70%; /* largura calculada em cima do elemento pai (caixa) */
+    padding: 10px; /* espaços internos do input */
+    border-radius: 5px; /* arredondamento das bordas do input */
+    border: 1px solid #CCCCCC;
+}
+
+#botao-adicionar {
+    padding: 10px;
+    cursor: pointer; /* transforma o cursor do mouse em mãozinha */
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    background-color: #059905; /* cor de fundo do botão */
+    color: #FFFFFF; /* cor do texto do botão */
+}
+
+#titulo {
+    text-align: center; /* alinha o texto ao centro */
+}
+
+.botao-remover {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+li {
+    list-style: none; /* remove o estilo de lista (remove as bolinhas) */
+    background-color: #EEEEEE;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px; /* margem na base do elemento */
+
+    display: flex;
+    justify-content: space-between; /* coloca espaço entre os elementos */
+    align-items: center;
+}
+
+#lista-tarefas {
+    padding: 0;
+}
