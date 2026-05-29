@@ -1,34 +1,40 @@
-const inputTarefa = document.getElementById("input-tarefa");
+const inputTarefa = document.querySelector("#input-tarefa");
 const botaoAdicionar = document.getElementById("botao-adicionar");
 const listaTarefas = document.getElementById("lista-tarefas");
 
-// criando lista vazia
+// criando uma lista vazia
 let tarefas = [];
 
-// função para salvar tarefas
+// função para salvar tarefas no local storage
 function salvarTarefas() {
+
     /*
         localStorage -> armazenamento local do navegador
         setItem -> salva no armazenamento o conteúdo recebido
-        JSON.stringify(tarefas) -> pega a lista de tarefas, converte para texto (string) e armazena esse texto.
+        JSON.stringify(tarefas) -> pega a lista de tarefas, converte para texto (string) e armazena esse texto
     */
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
 }
 
 // função para mostrar tarefas na tela
 function mostrarTarefas() {
-    listaTarefas.innerHTML = "";
+    listaTarefas.innerHTML = ""; // limpa a lista de tarefas na tela
 
+    // tarefas = [tomar cafe, almoçar, jantar]
     for(let i = 0; i < tarefas.length; i++) {
-
+        // para cada elemento, cria um li
         const li = document.createElement("li");
-        li.innerText = tarefas[i]
+        // cada vez que criar o li, passa o valor que está na lista de tarefas na posição i
+        li.innerText = tarefas[i];
 
-        const botaoRemover = document.createElement("button");
+        const botaoRemover = document.createElement("button")
         botaoRemover.innerText = "🗑️";
+
+        // cria classe para usar estilização do css
         botaoRemover.className = "botao-remover";
 
         botaoRemover.addEventListener("click", () => {
+            // CHAMAR FUNÇÃO PARA REMOVER TAREFA
             removerTarefas(i);
         })
 
@@ -42,68 +48,47 @@ function removerTarefas(posicaoTarefa) {
     // splice -> (posicaoInicial, qtde_itens)
     tarefas.splice(posicaoTarefa, 1);
 
-    //depois de remover, chamo a função de salvar no localStorage
+    // depois de remover, chamo a função de salvar no localStorage
+    // atualiza localStorage com array de tarefas atualizado
     salvarTarefas();
 
-    // mostra as tarefas atualizadas, sem as que foram removidas.
+    // mostra as tarefas atualizadas, sem as tarefas que foram removidas
     mostrarTarefas();
+    
+
 }
 
-// função para adicionar tarefas
 function adicionarTarefas() {
     const valorTarefa = inputTarefa.value;
 
-    if(valorTarefa === "") {
+    if(valorTarefa.trim() === "") {
         alert("Digite uma tarefa!");
-        return; // não deixa que a tarefa vazia apareça na tela
+        return; // não deixa a tarefa vazia aparecer na tela
     }
 
-    tarefas.push(valorTarefa); // adiciona a tarefa digitada dentro do array.
+    // adiciona tarefas dentro do array
+    tarefas.push(valorTarefa); 
     inputTarefa.value = "";
 
     salvarTarefas();
     mostrarTarefas();
+
 }
 
-// função para carregar tarefas salvas no localStorage
+// função para carregar as tarefas salvas no localStorage
 function carregarTarefas() {
-    // pega as tarefas e armazena na variavel 'tarefasSalvas'
+    // pega as tarefas do localStorage e armazena na variavel 'tarefasSalvas'
     const tarefasSalvas = localStorage.getItem("tarefas");
 
-    // se existir alguma coisa dentro de tarefas salvas
-    // então converte a tarefa e mostra na tela.
+    // se existir alguma coisa dentro de tarefasSalvas 
+    // então converte a tarefa e mostra na tela
     if(tarefasSalvas) {
-        // transforma o texto em array novamente
+        // transforma o texto que está no localStorage em array novamente
         tarefas = JSON.parse(tarefasSalvas);
         mostrarTarefas();
     }
 }
 
 botaoAdicionar.addEventListener("click", adicionarTarefas);
+
 carregarTarefas();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-let listaTeste = ["Fernanda", "Guilherme", "Lucas"]; // tamanho 3
-
-// let i = 0 -> o valor inicial da repetição vai iniciar em zero
-// i < listaTeste.length -> validar se o i é menor que tamanho da lista
-
-for(let i = 0; i < listaTeste.length; i++) {
-    console.log(listaTeste[i]);
-}
-*/
